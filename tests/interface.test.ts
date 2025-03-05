@@ -1,5 +1,6 @@
 import { Seller } from "../src/interface";
 import { Employee, Manager } from "../src/employee";
+import { Human } from "../src/human";
 describe("Interface", () => {
 
     it("should support interface typescript", () => {
@@ -39,9 +40,9 @@ describe("Interface", () => {
     });
 
     it("should object interface", () => {
-
         interface Person {
-            [key: string]: string;
+            name: string;
+            age: string;
         }
 
         const person: Person = {
@@ -67,5 +68,44 @@ describe("Interface", () => {
         };
         console.info(manager);
         console.info(employee);
+    });
+
+    it("should support function in interface", () => {
+
+
+        const Aji: Human = {
+            name: "Aji",
+            sayHello: (name: string): string => {
+                return `Hello ${name}`;
+            }
+        };
+
+        console.info(Aji.sayHello(Aji.name));
+    });
+    it("should support intersection type", () => {
+        interface hasName {
+            name: string;
+        }
+        interface hasId {
+            id: string;
+        }
+        type Domain = hasName & hasId;
+
+        const domain: Domain = {
+            name: "Aji",
+            id: "1"
+        };
+    });
+    it("should support assertion type", () => {
+        const person1: any = {
+            name: "Aji",
+            age: 30
+        };
+
+        const person2: Human = person1 as Human;
+        console.info(person2);
+        person1.sayHello(person1.name);
+        // person2.sayHello(person2.name);
+
     });
 });
